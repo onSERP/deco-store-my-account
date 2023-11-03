@@ -1,14 +1,19 @@
 import Title from "../components/my-account/Title.tsx";
+import Button from "$store/components/ui/Button.tsx";
+import Icon from "../components/ui/Icon.tsx";
 import Menu from "../components/my-account/Menu.tsx";
 import UserInfo from "../components/my-account/UserInfo.tsx";
 import MyAccountJS from "../islands/MyAccountJS.tsx";
 
 import { useId } from "$store/sdk/useId.ts";
 
-import OrderList from "../components/my-account/OrderList.tsx";
+import Address from "../components/my-account/Address.tsx";
 import AddressList from "../components/my-account/AddressList.tsx";
-import { default as OrderComponent } from "../components/my-account/Order.tsx";
 import CardList from "../components/my-account/CardList.tsx";
+import Card from "../components/my-account/Card.tsx";
+import Custom from "./Custom.tsx";
+import OrderList from "../components/my-account/OrderList.tsx";
+import { default as OrderComponent } from "../components/my-account/Order.tsx";
 import UserData from "../components/my-account/UserData.tsx";
 
 import NotFound from "../sections/product/NotFound.tsx";
@@ -137,15 +142,15 @@ const loaderData: LoaderData = {
       items: [
         {
           id: 1,
-          name: "Camiseta",
+          name: "Camiseta lisa tech T-shirt",
           price: 100,
-          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1",
+          image: "https://via.placeholder.com/175x175/D3D3D3/?text=Imagem+1",
         },
         {
           id: 2,
-          name: "Calça",
+          name: "Calça jeans skinny tamanho 43",
           price: 100,
-          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2",
+          image: "https://via.placeholder.com/175x175/D3D3D3/?text=Imagem+2",
         },
       ],
     },
@@ -251,11 +256,13 @@ const loaderData: LoaderData = {
 function MyAccount({
   sectionTitle = "Minha Conta",
   activeComponents = {
+    showCustomList: true,
     showOrderList: true,
     showAddressList: true,
     showCardList: true,
     showUserData: true,
   },
+  customListTitle = "Minhas Ofertas",
   orderListTitle = "Pedidos",
   addressListTitle = "Endereços",
   cardListTitle = "Formas de Pagamento",
@@ -268,6 +275,7 @@ function MyAccount({
     activeContent: useId(),
     menu: useId(),
     components: {
+      customList: useId(),
       orderList: useId(),
       addressList: useId(),
       order: useId(),
@@ -298,11 +306,24 @@ function MyAccount({
               itemsIds={ids.components}
             />
           </div>
-          <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
-            {activeComponents.showOrderList &&
-              (
-                <div id={`${ids.components.orderList}`} data-tab-content>
-                  {orderPage
+        <Button
+          class="btn btn-primary btn-sm my-custom-drawer"
+          aria-label="open menu"
+        >
+          <Icon id="Bars3" size={16} strokeWidth={2} />
+        </Button>
+
+        <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
+          {activeComponents.showCustomList &&
+            (
+              <div id={`${ids.components.customList}`} data-tab-content>
+                <Custom title={customListTitle} />
+              </div>
+            )}
+          {activeComponents.showOrderList &&
+            (
+              <div id={`${ids.components.orderList}`} data-tab-content>
+                           {orderPage
                     ? (
                       <OrderComponent
                         title={`Pedido #${orderPage}`}
@@ -319,21 +340,6 @@ function MyAccount({
                     )}
                 </div>
               )}
-            {activeComponents.showAddressList &&
-              (
-                <div id={`${ids.components.addressList}`} data-tab-content>
-                  <AddressList
-                    title={addressListTitle}
-                    addresses={loaderData.addresses}
-                  />
-                </div>
-              )}
-            {activeComponents.showCardList && (
-              <div id={`${ids.components.cardList}`} data-tab-content>
-                <CardList
-                  title={cardListTitle}
-                  cards={loaderData.cards}
-                />
               </div>
             )}
             {activeComponents.showUserData && (
