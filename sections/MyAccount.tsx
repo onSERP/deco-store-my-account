@@ -12,269 +12,296 @@ import CardList from "../components/my-account/CardList.tsx";
 import UserData from "../components/my-account/UserData.tsx";
 
 export interface Props {
-    sectionTitle?: string;
+  sectionTitle?: string;
 
-    activeComponents?: {
-        showOrderList?: boolean;
-        showAddressList?: boolean;
-        showCardList?: boolean;
-        showUserData?: boolean;
-    }
+  activeComponents?: {
+    showOrderList?: boolean;
+    showAddressList?: boolean;
+    showCardList?: boolean;
+    showUserData?: boolean;
+  };
+
+  orderListTitle?: string;
+  addressListTitle?: string;
+  cardListTitle?: string;
+  userDataTitle?: string;
 }
 
 export type Item = {
-    id: number;
-    name: string;
-    price: number;
-    image: string;
+  id: number;
+  name: string;
+  price: number;
+  image: string;
 };
 
 export type Order = {
-    id: number;
-    date: string;
-    status: string;
-    total: number;
-    shipping: number;
-    discount: number;
-    items: Item[];
+  id: number;
+  date: string;
+  status: string;
+  total: number;
+  shipping: number;
+  discount: number;
+  items: Item[];
 };
 
 export type Card = {
-    cardNumber: string;
-    flag: string;
-    name: string;
-    expiry: string;
-    isDefault: boolean;
+  cardNumber: string;
+  flag: string;
+  name: string;
+  expiry: string;
+  isDefault: boolean;
 };
 
 export type Address = {
-    nickName: string;
-    zipCode: string;
-    street: string;
-    number: string;
-    complement: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    recipient: string;
-    recipientDocument: string;
-    reference: string;
-    isDefault: boolean;
+  nickName: string;
+  zipCode: string;
+  street: string;
+  number: string;
+  complement: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  recipient: string;
+  recipientDocument: string;
+  reference: string;
+  isDefault: boolean;
 };
 
 export type UserData = {
-    name: string;
-    email: string;
-    friendlyName: string;
-    document: string;
-    birthDate: string;
-    phone: string;
-    gender: string;
+  name: string;
+  email: string;
+  friendlyName: string;
+  document: string;
+  birthDate: string;
+  phone: string;
+  gender: string;
 };
 
 export interface LoaderData {
-    user: UserData;
-    orders: Order[];
-    cards: Card[];
-    addresses: Address[];
-};
-
-const loaderData: LoaderData = {
-   user: {
-    name: 'Rafael Santos de Souza',
-    email: 'rafael@gmail.com',
-    friendlyName: 'Rafinha',
-    document: '000.000.000-00',
-    birthDate: '01/01/2000',
-    phone: '(00) 00000-0000',
-    gender: 'Masculino',
-   }, 
-    orders: [
-        {
-            id: 987292,
-            date: '01/01/2021',
-            status: 'Completo',
-            total: 200,
-            shipping: 10,
-            discount: 5,
-            items: [
-                {
-                    id: 1,
-                    name: 'Camiseta',
-                    price: 100,
-                    image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1',
-                },
-                {
-                    id: 2,
-                    name: 'Calça',
-                    price: 100,
-                    image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2',
-                },
-            ],
-        },
-        {
-          id: 987292,
-          date: '01/10/2022',
-          status: 'Cancelado',
-          total: 700,
-          shipping: 10,
-          discount: 5,
-          items: [
-              {
-                  id: 1,
-                  name: 'Camiseta',
-                  price: 100,
-                  image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1',
-              },
-              {
-                  id: 2,
-                  name: 'Calça',
-                  price: 100,
-                  image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2',
-              },
-          ],
-        },
-        {
-            id: 624392,
-            date: '01/03/2023',
-            status: 'Em processamento',
-            total: 300,
-            shipping: 0,
-            discount: 35,
-            items: [
-               {
-                    id: 1,
-                    name: 'Camiseta',
-                    price: 100,
-                    image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1',
-                },
-                {
-                    id: 2,
-                    name: 'Calça',
-                    price: 100,
-                    image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2',
-                },
-                {
-                    id: 3,
-                    name: 'Tênis',
-                    price: 100,
-                    image: 'https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+3',
-                },
-            ],
-        }
-    ],
-    cards: [
-        {
-            cardNumber: '**** **** **** 4444',
-            flag: 'visa',
-            name: 'Rafael',
-            expiry: '01/01',
-            isDefault: true,
-        },
-        {
-            cardNumber: '**** **** **** 4444',
-            flag: 'mastercard',
-            name: 'Rafael',
-            expiry: '01/01',
-            isDefault: false,
-        }
-    ],
-    addresses: [
-        {
-            nickName: 'Apartamento',
-            zipCode: '00000-000',
-            street: 'Rua das Couves',
-            number: '123',
-            complement: 'Casa',
-            neighborhood: 'Centro',
-            city: 'São Paulo',
-            state: 'SP',
-            recipient: 'Rafael',
-            recipientDocument: '000.000.000-00',
-            reference: 'Próximo ao mercado',
-            isDefault: true,
-        },
-        {   
-            nickName: 'Trabalho',
-            zipCode: '00000-000',
-            street: 'Rua das Couves',
-            number: '123',
-            complement: 'Casa',
-            neighborhood: 'Centro',
-            city: 'São Paulo',
-            state: 'SP',
-            recipient: 'Rafael',
-            recipientDocument: '000.000.000-00',
-            reference: 'Próximo ao mercado',
-            isDefault: false,
-        }
-    ],
+  user: UserData;
+  orders: Order[];
+  cards: Card[];
+  addresses: Address[];
 }
 
-function MyAccount({sectionTitle = 'Minha Conta', activeComponents = {
+const loaderData: LoaderData = {
+  user: {
+    name: "Rafael Santos de Souza",
+    email: "rafael@gmail.com",
+    friendlyName: "Rafinha",
+    document: "000.000.000-00",
+    birthDate: "01/01/2000",
+    phone: "(00) 00000-0000",
+    gender: "Masculino",
+  },
+  orders: [
+    {
+      id: 987292,
+      date: "01/01/2021",
+      status: "Completo",
+      total: 200,
+      shipping: 10,
+      discount: 5,
+      items: [
+        {
+          id: 1,
+          name: "Camiseta",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1",
+        },
+        {
+          id: 2,
+          name: "Calça",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2",
+        },
+      ],
+    },
+    {
+      id: 987292,
+      date: "01/10/2022",
+      status: "Cancelado",
+      total: 700,
+      shipping: 10,
+      discount: 5,
+      items: [
+        {
+          id: 1,
+          name: "Camiseta",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1",
+        },
+        {
+          id: 2,
+          name: "Calça",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2",
+        },
+      ],
+    },
+    {
+      id: 624392,
+      date: "01/03/2023",
+      status: "Em processamento",
+      total: 300,
+      shipping: 0,
+      discount: 35,
+      items: [
+        {
+          id: 1,
+          name: "Camiseta",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1",
+        },
+        {
+          id: 2,
+          name: "Calça",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2",
+        },
+        {
+          id: 3,
+          name: "Tênis",
+          price: 100,
+          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+3",
+        },
+      ],
+    },
+  ],
+  cards: [
+    {
+      cardNumber: "**** **** **** 4444",
+      flag: "visa",
+      name: "Rafael",
+      expiry: "01/01",
+      isDefault: true,
+    },
+    {
+      cardNumber: "**** **** **** 4444",
+      flag: "mastercard",
+      name: "Rafael",
+      expiry: "01/01",
+      isDefault: false,
+    },
+  ],
+  addresses: [
+    {
+      nickName: "Apartamento",
+      zipCode: "00000-000",
+      street: "Rua das Couves",
+      number: "123",
+      complement: "Casa",
+      neighborhood: "Centro",
+      city: "São Paulo",
+      state: "SP",
+      recipient: "Rafael",
+      recipientDocument: "000.000.000-00",
+      reference: "Próximo ao mercado",
+      isDefault: true,
+    },
+    {
+      nickName: "Trabalho",
+      zipCode: "00000-000",
+      street: "Rua das Couves",
+      number: "123",
+      complement: "Casa",
+      neighborhood: "Centro",
+      city: "São Paulo",
+      state: "SP",
+      recipient: "Rafael",
+      recipientDocument: "000.000.000-00",
+      reference: "Próximo ao mercado",
+      isDefault: false,
+    },
+  ],
+};
+
+function MyAccount({
+  sectionTitle = "Minha Conta",
+  activeComponents = {
     showOrderList: true,
     showAddressList: true,
     showCardList: true,
     showUserData: true,
-},}: Props) {
-    const ids = {
-        root: useId(),
-        activeContent: useId(),
-        menu: useId(),
-        components: {
-            orderList: useId(),
-            addressList: useId(),
-            order: useId(),
-            cardList: useId(),
-            userData: useId(),
-        }
-    };
+  },
+  orderListTitle = "Pedidos",
+  addressListTitle = "Endereços",
+  cardListTitle = "Formas de Pagamento",
+  userDataTitle = "Cadastro",
+}: Props) {
+  const ids = {
+    root: useId(),
+    activeContent: useId(),
+    menu: useId(),
+    components: {
+      orderList: useId(),
+      addressList: useId(),
+      order: useId(),
+      cardList: useId(),
+      userData: useId(),
+    },
+  };
 
-  return (<div>
-     <div class="container px-4" id={ids.root}>
+  return (
+    <div>
+      <div class="container px-4" id={ids.root}>
         <Title content={sectionTitle} />
         <div class="flex justify-between flex-wrap">
-            <div class="w-full lg:w-80">
-                <UserInfo name={loaderData.user.name} email={loaderData.user.email}/>
-                <Menu id={ids.menu} activeComponents={activeComponents} itemsIds={ids.components} />
+          <div class="w-full lg:w-80">
+            <div class="mb-8">
+              <UserInfo
+                name={loaderData.user.name}
+                email={loaderData.user.email}
+              />
             </div>
-            <div class="w-full lg:w-auto flex-1 pl-8" id={ids.activeContent}>
-                {activeComponents.showOrderList && 
-                (
-                    <div id={`${ids.components.orderList}`} data-tab-content>
-                        <OrderList title="Pedidos" orders={loaderData.orders}/>
-                    </div>
-                )
-                }
-               {activeComponents.showAddressList &&
-               (
+            <Menu
+              id={ids.menu}
+              activeComponents={activeComponents}
+              itemsIds={ids.components}
+            />
+          </div>
+          <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
+            {activeComponents.showOrderList &&
+              (
+                <div id={`${ids.components.orderList}`} data-tab-content>
+                  <OrderList
+                    title={orderListTitle}
+                    orders={loaderData.orders}
+                  />
+                </div>
+              )}
+            {activeComponents.showAddressList &&
+              (
                 <div id={`${ids.components.addressList}`} data-tab-content>
-                <AddressList title="Endereços" addresses={loaderData.addresses}/>
-            </div>
-               )
-
-               }
-                {
-                    activeComponents.showCardList && (
-                        <div id={`${ids.components.cardList}`} data-tab-content>
-                    <CardList title="Formas de Pagamento" cards={loaderData.cards}/>
+                  <AddressList
+                    title={addressListTitle}
+                    addresses={loaderData.addresses}
+                  />
                 </div>
-                    )
-                }
-              {
-                activeComponents.showUserData && (
-                    <div id={`${ids.components.userData}`} data-tab-content>
-                    <UserData title="Cadastro" data={loaderData.user}/>
-                </div>
-                )
-              }
-            </div>
+              )}
+            {activeComponents.showCardList && (
+              <div id={`${ids.components.cardList}`} data-tab-content>
+                <CardList
+                  title={cardListTitle}
+                  cards={loaderData.cards}
+                />
+              </div>
+            )}
+            {activeComponents.showUserData && (
+              <div id={`${ids.components.userData}`} data-tab-content>
+                <UserData title={userDataTitle} data={loaderData.user} />
+              </div>
+            )}
+          </div>
         </div>
-     </div>
-     <MyAccountJS rootId={ids.root} tabContainerId={ids.activeContent} menuId={ids.menu}/>
-  </div>);
+      </div>
+      <MyAccountJS
+        rootId={ids.root}
+        tabContainerId={ids.activeContent}
+        menuId={ids.menu}
+      />
+    </div>
+  );
 }
-
-
 
 export default MyAccount;

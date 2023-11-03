@@ -8,7 +8,7 @@ export interface Props {
 
 function UserInfo({title, data}: Props) {
   return (<div>
-      <Title content={title} size="small" />
+      <Title content={title} size="medium" />
       <div>
         <div class="mb-2">
           <p class="uppercase font-bold">Nome completo</p>

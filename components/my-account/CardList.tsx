@@ -4,16 +4,16 @@ import type {Card as CardType} from "../../sections/MyAccount.tsx";
 
 export interface Props {
   title: string
-  cards: Card[]
+  cards: CardType[]
 }
 
 function CardList({title, cards}: Props) {
   return <div>
-    <Title content={title} size="small" />
-    <div class="bg-white flex flex-row justify-center items-center mb-4"> 
-      {cards.map((card) => {
+    <Title content={title} size="medium" />
+    <div class="bg-white flex flex-row justify-center items-center mb-4">
+      {cards.map((card, i) => {
       return (
-        <div class="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl">
+        <div key={i} class="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl">
             <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png"></img>
             <div class="w-full px-8 absolute top-8 content-center">
               <div class="pt-1">

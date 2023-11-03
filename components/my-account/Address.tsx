@@ -7,7 +7,7 @@ import type {Address as AddressType} from "../../sections/MyAccount.tsx";
 
 function Address({title = "Novo endereço", address}: Props) {
   return <div>
-    <Title content={title} size='small'/>
+    <Title content={title} size='medium'/>
     <form>
       <div>
         <input type="text" placeholder="CEP" class="input input-bordered w-1/3 max-w-xs" />
@@ -54,7 +54,7 @@ function Address({title = "Novo endereço", address}: Props) {
       
       <div class="form-control">
         <label class="label cursor-pointer">
-          <input type="checkbox" checked="checked" class="checkbox" />
+          <input type="checkbox" checked={true} class="checkbox" />
           <span class="label-text">Tornar este meu endereço principal</span> 
         </label>
       </div>
