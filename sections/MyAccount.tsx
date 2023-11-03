@@ -297,7 +297,7 @@ function MyAccount({
     <MyAccountJS
       tabsData={{
         rootId: ids.root,
-        tabsContainerId: ids.activeContent,
+        tabContainerId: ids.activeContent,
         menuId: ids.menu
       }}
       userData={{

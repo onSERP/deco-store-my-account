@@ -1,17 +1,16 @@
 import { useEffect } from "preact/hooks";
-import type {UserData as UserDataType} from "../../sections/MyAccount.tsx";
+import type { UserData as UserDataType } from "../../sections/MyAccount.tsx";
 
 export interface Props {
- tabsData: {
-  rootId: string;
-  tabContainerId: string;
-  menuId: string;
- }
- userData: {
-  title: string;
-  data: UserDataType
- }
-
+  tabsData: {
+    rootId: string;
+    tabContainerId: string;
+    menuId: string;
+  };
+  userData: {
+    title: string;
+    data: UserDataType;
+  };
 }
 
 const ATTRIBUTES = {
@@ -22,7 +21,8 @@ const ATTRIBUTES = {
 };
 
 function MyAccountJS({ tabsData, userData }: Props) {
-  const tabsFn = ({ rootId, tabContainerId, menuId }: Props) => {
+  const tabsFn = ({ rootId, tabContainerId, menuId }: Props["tabsData"]) => {
+    console.log(rootId, tabContainerId, menuId);
     const root = document.getElementById(rootId);
     const tabContainer = document.getElementById(tabContainerId);
     const tabContent = tabContainer?.querySelectorAll(
@@ -58,27 +58,27 @@ function MyAccountJS({ tabsData, userData }: Props) {
     });
   };
 
-  const userDataFn = ({title, data}) => {
+  const userDataFn = ({ title, data }) => {
     let editButton = document.getElementById("user-data-edit");
     let editForm = document.getElementById("user-data-edit-form");
     let dataShow = document.getElementById("user-data-show");
     let returnButton = document.getElementById("user-data-edit-return");
 
-    editButton?.addEventListener("click", function() {
-        editForm?.classList.remove("hidden");
-        dataShow?.classList.add("hidden");
+    editButton?.addEventListener("click", function () {
+      editForm?.classList.remove("hidden");
+      dataShow?.classList.add("hidden");
     });
 
-    returnButton?.addEventListener("click", function() {
-        editForm?.classList.add("hidden");
-        dataShow?.classList.remove("hidden");
+    returnButton?.addEventListener("click", function () {
+      editForm?.classList.add("hidden");
+      dataShow?.classList.remove("hidden");
     });
-  }
+  };
 
   useEffect(() => {
     tabsFn(tabsData);
-    userDataFn(userData)
-  }, []);
+    userDataFn(userData);
+  }, [tabsData, userData]);
 
   return <div data-my-account-js />;
 }
