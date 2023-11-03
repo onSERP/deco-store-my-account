@@ -13,8 +13,40 @@ import CardList from "../components/my-account/CardList.tsx";
 import Card from "../components/my-account/Card.tsx";
 import Custom from "./Custom.tsx";
 import OrderList from "../components/my-account/OrderList.tsx";
-import Order from "../components/my-account/Order.tsx";
+import { default as OrderComponent } from "../components/my-account/Order.tsx";
 import UserData from "../components/my-account/UserData.tsx";
+
+import NotFound from "../sections/product/NotFound.tsx";
+
+import { AppContext } from "apps/vtex/mod.ts";
+
+export interface LoaderReturn extends Props {
+  notFound?: boolean;
+  orderPage?: number;
+}
+
+export const loader = (
+  props: Props,
+  req: Request,
+  ctx: AppContext,
+): LoaderReturn => {
+  const url = new URL(req.url);
+
+  if (url.pathname === "/my-account") {
+    return props;
+  }
+
+  if (url.pathname.startsWith("/my-account/order/")) {
+    const id = url.pathname.split("/order/")[1];
+
+    if (loaderData.orders.find((order) => order.id === Number(id))) {
+      return { ...props, orderPage: Number(id) };
+    }
+  }
+
+  ctx.response.status = 404;
+  return { ...props, notFound: true };
+};
 
 export interface Props {
   sectionTitle?: string;
@@ -235,7 +267,9 @@ function MyAccount({
   addressListTitle = "Endereços",
   cardListTitle = "Formas de Pagamento",
   userDataTitle = "Cadastro",
-}: Props) {
+  notFound = false,
+  orderPage,
+}: LoaderReturn) {
   const ids = {
     root: useId(),
     activeContent: useId(),
@@ -250,24 +284,28 @@ function MyAccount({
     },
   };
 
-  return (<>
-    <div class="container px-4" id={ids.root}>
-      <Title content={sectionTitle} />
-      <div class="flex justify-between flex-wrap">
-        <div class="w-full lg:w-80">
-          <div class="mb-8">
-            <UserInfo
-              name={loaderData.user.name}
-              email={loaderData.user.email}
+  if (notFound) {
+    return <NotFound />;
+  }
+
+  return (
+    <>
+      <div class="container px-4" id={ids.root}>
+        <Title content={sectionTitle} />
+        <div class="flex justify-between flex-wrap">
+          <div class="w-full lg:w-80">
+            <div class="mb-8">
+              <UserInfo
+                name={loaderData.user.name}
+                email={loaderData.user.email}
+              />
+            </div>
+            <Menu
+              id={ids.menu}
+              activeComponents={activeComponents}
+              itemsIds={ids.components}
             />
           </div>
-          <Menu
-            id={ids.menu}
-            activeComponents={activeComponents}
-            itemsIds={ids.components}
-          />
-        </div>
-
         <Button
           class="btn btn-primary btn-sm my-custom-drawer"
           aria-label="open menu"
@@ -285,49 +323,46 @@ function MyAccount({
           {activeComponents.showOrderList &&
             (
               <div id={`${ids.components.orderList}`} data-tab-content>
-                <OrderList
-                  title={orderListTitle}
-                  orders={loaderData.orders}
-                />
+                           {orderPage
+                    ? (
+                      <OrderComponent
+                        title={`Pedido #${orderPage}`}
+                        order={loaderData.orders.find((order) =>
+                          order.id
+                        ) as Order}
+                      />
+                    )
+                    : (
+                      <OrderList
+                        title={orderListTitle}
+                        orders={loaderData.orders}
+                      />
+                    )}
+                </div>
+              )}
               </div>
             )}
-          {activeComponents.showAddressList &&
-            (
-              <div id={`${ids.components.addressList}`} data-tab-content>
-                <AddressList
-                  title={addressListTitle}
-                  addresses={loaderData.addresses}
-                />
+            {activeComponents.showUserData && (
+              <div id={`${ids.components.userData}`} data-tab-content>
+                <UserData title={userDataTitle} data={loaderData.user} />
               </div>
             )}
-          {activeComponents.showCardList && (
-            <div id={`${ids.components.cardList}`} data-tab-content>
-              <CardList
-                title={cardListTitle}
-                cards={loaderData.cards}
-              />
-            </div>
-          )}
-          {activeComponents.showUserData && (
-            <div id={`${ids.components.userData}`} data-tab-content>
-              <UserData title={userDataTitle} data={loaderData.user} />
-            </div>
-          )}
+          </div>
         </div>
       </div>
-    </div>
-    <MyAccountJS
-      tabsData={{
-        rootId: ids.root,
-        tabContainerId: ids.activeContent,
-        menuId: ids.menu
-      }}
-      userData={{
-        title: userDataTitle,
-        data: loaderData.user
-      }}
-    />
-  </>);
+      <MyAccountJS
+        tabsData={{
+          rootId: ids.root,
+          tabContainerId: ids.activeContent,
+          menuId: ids.menu,
+        }}
+        userData={{
+          title: userDataTitle,
+          data: loaderData.user,
+        }}
+      />
+    </>
+  );
 }
 
 export default MyAccount;

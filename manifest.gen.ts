@@ -4,6 +4,7 @@
 
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
+import * as $$$2 from "./loaders/vtex/my-account.ts";
 import * as $$$$$$0 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryList.tsx";
 import * as $$$$$$2 from "./sections/Content/Benefits.tsx";
@@ -47,6 +48,7 @@ const manifest = {
   "loaders": {
     "deco-sites/storefront/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/storefront/loaders/List/Sections.tsx": $$$1,
+    "deco-sites/storefront/loaders/vtex/my-account.ts": $$$2,
   },
   "sections": {
     "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$0,

@@ -24,7 +24,10 @@ function OrderList({ title = "Pedidos", orders }: Props) {
             break;
         }
         return (
-          <div key={i} class="flex-col bg-white rounded shadow-xl my-4 px-4 py-4">
+          <div
+            key={i}
+            class="flex-col bg-white rounded shadow-xl my-4 px-4 py-4"
+          >
             <div class="flex justify-between items-center">
               <p class="font-bold">Pedido Nº {order.id}</p>
               <p class="text-gray-400">{order.date}</p>
@@ -35,7 +38,13 @@ function OrderList({ title = "Pedidos", orders }: Props) {
               <p>Pagamento:</p>
             </div>
             <div class="flex justify-between items-center py-4">
-              <a aria-label="Detalhes" href="#" class="btn">Detalhes</a>
+              <a
+                aria-label="Detalhes"
+                href={`/my-account/order/${order.id}`}
+                class="btn"
+              >
+                Detalhes
+              </a>
               <p class={statusClass}>{order.status}</p>
             </div>
           </div>
