@@ -1,4 +1,6 @@
 import Title from "../components/my-account/Title.tsx";
+import Button from "$store/components/ui/Button.tsx";
+import Icon from "../components/ui/Icon.tsx";
 import Menu from "../components/my-account/Menu.tsx";
 import UserInfo from "../components/my-account/UserInfo.tsx";
 import MyAccountJS from "../islands/MyAccountJS.tsx";
@@ -9,6 +11,7 @@ import Address from "../components/my-account/Address.tsx";
 import AddressList from "../components/my-account/AddressList.tsx";
 import CardList from "../components/my-account/CardList.tsx";
 import Card from "../components/my-account/Card.tsx";
+import Custom from "./Custom.tsx";
 import OrderList from "../components/my-account/OrderList.tsx";
 import Order from "../components/my-account/Order.tsx";
 import UserData from "../components/my-account/UserData.tsx";
@@ -221,11 +224,13 @@ const loaderData: LoaderData = {
 function MyAccount({
   sectionTitle = "Minha Conta",
   activeComponents = {
+    showCustomList: true,
     showOrderList: true,
     showAddressList: true,
     showCardList: true,
     showUserData: true,
   },
+  customListTitle = "Minhas Ofertas",
   orderListTitle = "Pedidos",
   addressListTitle = "Endereços",
   cardListTitle = "Formas de Pagamento",
@@ -236,6 +241,7 @@ function MyAccount({
     activeContent: useId(),
     menu: useId(),
     components: {
+      customList: useId(),
       orderList: useId(),
       addressList: useId(),
       order: useId(),
@@ -261,7 +267,21 @@ function MyAccount({
             itemsIds={ids.components}
           />
         </div>
+
+        <Button
+          class="btn btn-primary btn-sm my-custom-drawer"
+          aria-label="open menu"
+        >
+          <Icon id="Bars3" size={16} strokeWidth={2} />
+        </Button>
+
         <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
+          {activeComponents.showCustomList &&
+            (
+              <div id={`${ids.components.customList}`} data-tab-content>
+                <Custom title={customListTitle} />
+              </div>
+            )}
           {activeComponents.showOrderList &&
             (
               <div id={`${ids.components.orderList}`} data-tab-content>

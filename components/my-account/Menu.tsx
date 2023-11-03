@@ -3,6 +3,7 @@ import Icon from "../ui/Icon.tsx";
 export interface Props {
   id: string;
   activeComponents?: {
+    showCustomList?: boolean;
     showOrderList?: boolean;
     showAddressList?: boolean;
     showCardList?: boolean;
@@ -13,7 +14,23 @@ export interface Props {
 
 function Menu({ id, activeComponents, itemsIds }: Props) {
   return (
-    <div class="bg-white text-black" id={id}>
+    <div class="bg-white text-black hidden lg:block" id={id}>
+      {activeComponents?.showCustomList && (
+        <div
+          class="flex justify-between items-center cursor-pointer"
+          data-tab-menu-target={itemsIds.customList}
+          data-tab-menu-item
+        >
+          <div class="text-base py-4">
+            <p class="uppercase font-bold py-4">Minhas Ofertas</p>
+            <p class="text-gray-400">Ofertas personalizadas</p>
+          </div>
+          <div>
+            <Icon id="ChevronRight" size={16} />
+          </div>
+        </div>
+      )}
+      <hr></hr>
       {activeComponents?.showOrderList && (
         <div
           class="flex justify-between items-center cursor-pointer"

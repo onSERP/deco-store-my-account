@@ -56,6 +56,12 @@ function MyAccountJS({ tabsData, userData }: Props) {
         tabTarget?.classList.remove("hidden");
       });
     });
+
+    const drawer = document.getElementsByClassName("my-custom-drawer")[0];
+    const menu = document.getElementById(menuId);
+    drawer?.addEventListener("click", function () {
+      menu?.classList.toggle("hidden");
+    });
   };
 
   const userDataFn = ({ title, data }) => {
