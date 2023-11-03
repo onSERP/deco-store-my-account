@@ -48,6 +48,7 @@ export type Card = {
 };
 
 export type Address = {
+    nickName: string;
     zipCode: string;
     street: string;
     number: string;
@@ -80,13 +81,12 @@ export interface LoaderData {
 
 const loaderData: LoaderData = {
    user: {
-    name: 'Rafael',
+    name: 'Rafael Santos de Souza',
     email: 'rafael@gmail.com',
-    friendlyName: 'Rafael',
+    friendlyName: 'Rafinha',
     document: '000.000.000-00',
     birthDate: '01/01/2000',
     phone: '(00) 00000-0000',
-    document: '000.000.000-00',
     gender: 'Masculino',
    }, 
     orders: [
@@ -181,6 +181,7 @@ const loaderData: LoaderData = {
     ],
     addresses: [
         {
+            nickName: 'Apartamento',
             zipCode: '00000-000',
             street: 'Rua das Couves',
             number: '123',
@@ -193,7 +194,8 @@ const loaderData: LoaderData = {
             reference: 'Próximo ao mercado',
             isDefault: true,
         },
-        {
+        {   
+            nickName: 'Trabalho',
             zipCode: '00000-000',
             street: 'Rua das Couves',
             number: '123',
@@ -234,19 +236,19 @@ function MyAccount({sectionTitle = 'Minha Conta', activeComponents = {
         <div class="flex justify-between flex-wrap">
             <div class="w-full lg:w-80">
                 <UserInfo name={loaderData.user.name} email={loaderData.user.email}/>
-                <Menu id={ids.menu} activeComponents={activeComponents} />
+                <Menu id={ids.menu} activeComponents={activeComponents} itemsIds={ids.components} />
             </div>
             <div class="w-full lg:w-auto flex-1 pl-8" id={ids.activeContent}>
                 {activeComponents.showOrderList && 
                 (
-                    <div id={`order-list-${ids.components.orderList}`} data-tab-content>
+                    <div id={`${ids.components.orderList}`} data-tab-content>
                         <OrderList title="Pedidos" orders={loaderData.orders}/>
                     </div>
                 )
                 }
                {activeComponents.showAddressList &&
                (
-                <div id={`address-list-${ids.components.addressList}`} data-tab-content>
+                <div id={`${ids.components.addressList}`} data-tab-content>
                 <AddressList title="Endereços" addresses={loaderData.addresses}/>
             </div>
                )
@@ -254,14 +256,14 @@ function MyAccount({sectionTitle = 'Minha Conta', activeComponents = {
                }
                 {
                     activeComponents.showCardList && (
-                        <div id={`card-list-${ids.components.cardList}`} data-tab-content>
+                        <div id={`${ids.components.cardList}`} data-tab-content>
                     <CardList title="Formas de Pagamento" cards={loaderData.cards}/>
                 </div>
                     )
                 }
               {
                 activeComponents.showUserData && (
-                    <div id={`user-data-${ids.components.userData}`} data-tab-content>
+                    <div id={`${ids.components.userData}`} data-tab-content>
                     <UserData title="Cadastro" data={loaderData.user}/>
                 </div>
                 )

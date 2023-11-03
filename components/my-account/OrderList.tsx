@@ -1,9 +1,9 @@
 export interface Props {
   title: string;
-  orders: Order[];
+  orders: OrderType[];
 }
 import Title from "./Title.tsx";
-import Order from "../../sections/MyAccount.tsx";
+import type {Order as OrderType} from "../../sections/MyAccount.tsx";
 
 function OrderList({title = 'Pedidos', orders}: Props) {
   return (
@@ -22,7 +22,7 @@ function OrderList({title = 'Pedidos', orders}: Props) {
             statusClass = 'text-red-600 uppercase font-bold';
             break;
         }
-        return (<div class="flex-col bg-white rounded shadow-xl my-4 px-4py-4">
+        return (<div class="flex-col bg-white rounded shadow-xl my-4 px-4 py-4">
           <div class="flex justify-between items-center">
             <p class="font-bold">Pedido Nº {order.id}</p>
             <p class="text-gray-400">{order.date}</p>

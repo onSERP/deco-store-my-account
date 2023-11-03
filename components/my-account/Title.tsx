@@ -1,9 +1,9 @@
 export interface Props {
     content: string;
-    size: 'small' | 'medium' | 'large';
+    size?: 'small' | 'medium' | 'large';
 }
 
-function Title({content, size}: Props) {
+function Title({content, size = "large"}: Props) {
 
     let sizeClass = '';
 

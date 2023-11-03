@@ -1,7 +1,15 @@
-export interface Props {}
+import Title from "./Title.tsx";
+import type {Card as CardType} from "../../sections/MyAccount.tsx";
 
-function Card({}: Props) {
-  return <div></div>;
+export interface Props {
+  title: string;
+  card: CardType;
+}
+
+function Card({title, card}: Props) {
+  return <div>
+    <Title content={title} />
+  </div>;
 }
 
 export default Card;
