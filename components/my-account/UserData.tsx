@@ -76,36 +76,36 @@ function UserDataEdit({title, data}: Props) {
       </div>
 
       <div class="form-control w-full max-w-xs">
-          <label class="label">
-            <span class="label-text uppercase font-bold">Sexo</span>
-          </label>
-          <select class="select select-bordered w-full max-w-xs">
-            <option value="Masculino" selected={data.gender === "Masculino"}>Masculino</option>
-            <option value="Feminino" selected={data.gender === "Feminino"}>Feminino</option>
-            <option value="Outro" selected={data.gender === "Outro"}>Outro</option>
-          </select>
-        </div>
+        <label class="label">
+          <span class="label-text uppercase font-bold">Sexo</span>
+        </label>
+        <select class="select select-bordered w-full max-w-xs">
+          <option value="Masculino" selected={data.gender === "Masculino"}>Masculino</option>
+          <option value="Feminino" selected={data.gender === "Feminino"}>Feminino</option>
+          <option value="Outro" selected={data.gender === "Outro"}>Outro</option>
+        </select>
+      </div>
 
-        <div class="form-control w-full max-w-xs">
-          <label class="label">
-            <span class="label-text uppercase font-bold">CPF</span>
-          </label>
-          <input type="text" placeholder="CPF" value={`${data.document? data.document : ""}`} class="input input-bordered w-full max-w-xs" />
-        </div>
+      <div class="form-control w-full max-w-xs">
+        <label class="label">
+          <span class="label-text uppercase font-bold">CPF</span>
+        </label>
+        <input type="text" placeholder="CPF" value={`${data.document? data.document : ""}`} class="input input-bordered w-full max-w-xs" />
+      </div>
 
-        <div class="form-control w-full max-w-xs mb-4">
-          <label class="label">
-            <span class="label-text uppercase font-bold">Telefone</span>
-          </label>
-          <input type="text" placeholder="Telefone" value={`${data.phone? data.phone : ""}`} class="input input-bordered w-full max-w-xs" />
-        </div>
+      <div class="form-control w-full max-w-xs mb-4">
+        <label class="label">
+          <span class="label-text uppercase font-bold">Telefone</span>
+        </label>
+        <input type="text" placeholder="Telefone" value={`${data.phone? data.phone : ""}`} class="input input-bordered w-full max-w-xs" />
+      </div>
 
-        <div class="form-control flex content-center mb-4">
-          <label class="cursor-pointer">
-            <input type="checkbox" checked="checked" class="checkbox" />
-            <span class="label-text ml-2">Quero receber e-mails com novidades</span> 
-          </label>
-        </div>
+      <div class="form-control flex content-center mb-4">
+        <label class="cursor-pointer">
+          <input type="checkbox" checked="checked" class="checkbox" />
+          <span class="label-text ml-2">Quero receber e-mails com novidades</span> 
+        </label>
+      </div>
 
       <a aria-label="Salvar Alterações" href="#" class="btn btn-primary uppercase">Salvar Alterações</a>
       <a id="user-data-edit-return" aria-label="Voltar" href="#" class="btn btn-primary uppercase ml-4">Voltar</a>
