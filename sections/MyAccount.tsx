@@ -107,15 +107,15 @@ const loaderData: LoaderData = {
       items: [
         {
           id: 1,
-          name: "Camiseta",
+          name: "Camiseta lisa tech T-shirt",
           price: 100,
-          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+1",
+          image: "https://via.placeholder.com/175x175/D3D3D3/?text=Imagem+1",
         },
         {
           id: 2,
-          name: "Calça",
+          name: "Calça jeans skinny tamanho 43",
           price: 100,
-          image: "https://via.placeholder.com/470x594/FFFFFF/?text=Imagem+2",
+          image: "https://via.placeholder.com/175x175/D3D3D3/?text=Imagem+2",
         },
       ],
     },
