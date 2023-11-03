@@ -5,10 +5,12 @@ import MyAccountJS from "../islands/MyAccountJS.tsx";
 
 import { useId } from "$store/sdk/useId.ts";
 
-import OrderList from "../components/my-account/OrderList.tsx";
+import Address from "../components/my-account/Address.tsx";
 import AddressList from "../components/my-account/AddressList.tsx";
-import Order from "../components/my-account/Order.tsx";
 import CardList from "../components/my-account/CardList.tsx";
+import Card from "../components/my-account/Card.tsx";
+import OrderList from "../components/my-account/OrderList.tsx";
+import Order from "../components/my-account/Order.tsx";
 import UserData from "../components/my-account/UserData.tsx";
 
 export interface Props {
