@@ -1,13 +1,14 @@
 import Title from "./Title.tsx";
-import type {UserData} from "../../sections/MyAccount.tsx";
+import type {UserData as UserDataType} from "../../sections/MyAccount.tsx";
 
 export interface Props {
     title: string;
-    data: UserData
+    data: UserDataType
 }
 
-function UserInfo({title, data}: Props) {
-  return (<div>
+function UserData({title, data}: Props) {
+  return (<>
+    <div id="user-data-show">
       <Title content={title} size="medium" />
       <div>
         <div class="mb-2">
@@ -41,9 +42,30 @@ function UserInfo({title, data}: Props) {
         </div>
       </div>
 
-      <a aria-label="Editar Informações" href="#" class="btn btn-primary uppercase">Editar Informações</a>
+      <a id="user-data-edit" aria-label="Editar Informações" href="#" class="btn btn-primary uppercase">Editar Informações</a>
+      <a aria-label="Alterar Senha" href="#" class="btn btn-primary uppercase ml-4">Alterar Senha</a>
+    </div>
+    <UserDataEdit title={title} data={data} />
+  </>);
+}
+
+function UserDataEdit({title, data}: Props) {
+  return (<div id="user-data-edit-form" class="hidden">
+      <Title content={title} size="medium" />
+      <div>
+        <div class="mb-2">
+          <input type="text" placeholder={`${data.name? data.name : "Nome Completo"}`} class="input input-bordered w-full max-w-xs" />
+        </div>
+
+        <div class="mb-2">
+        <input type="text" placeholder={`${data.email? data.email : "E-mail"}`} class="input input-bordered w-full max-w-xs" />
+        </div>
+      </div>
+
+      <a aria-label="Salvar Informações" href="#" class="btn btn-primary uppercase">Salvar Informações</a>
+      <a id="user-data-edit-return" aria-label="Voltar" href="#" class="btn btn-primary uppercase ml-4">Voltar</a>
     </div>
   );
 }
 
-export default UserInfo;
+export default UserData;

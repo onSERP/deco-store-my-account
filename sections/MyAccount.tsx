@@ -242,66 +242,70 @@ function MyAccount({
     },
   };
 
-  return (
-    <div>
-      <div class="container px-4" id={ids.root}>
-        <Title content={sectionTitle} />
-        <div class="flex justify-between flex-wrap">
-          <div class="w-full lg:w-80">
-            <div class="mb-8">
-              <UserInfo
-                name={loaderData.user.name}
-                email={loaderData.user.email}
-              />
-            </div>
-            <Menu
-              id={ids.menu}
-              activeComponents={activeComponents}
-              itemsIds={ids.components}
+  return (<>
+    <div class="container px-4" id={ids.root}>
+      <Title content={sectionTitle} />
+      <div class="flex justify-between flex-wrap">
+        <div class="w-full lg:w-80">
+          <div class="mb-8">
+            <UserInfo
+              name={loaderData.user.name}
+              email={loaderData.user.email}
             />
           </div>
-          <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
-            {activeComponents.showOrderList &&
-              (
-                <div id={`${ids.components.orderList}`} data-tab-content>
-                  <OrderList
-                    title={orderListTitle}
-                    orders={loaderData.orders}
-                  />
-                </div>
-              )}
-            {activeComponents.showAddressList &&
-              (
-                <div id={`${ids.components.addressList}`} data-tab-content>
-                  <AddressList
-                    title={addressListTitle}
-                    addresses={loaderData.addresses}
-                  />
-                </div>
-              )}
-            {activeComponents.showCardList && (
-              <div id={`${ids.components.cardList}`} data-tab-content>
-                <CardList
-                  title={cardListTitle}
-                  cards={loaderData.cards}
+          <Menu
+            id={ids.menu}
+            activeComponents={activeComponents}
+            itemsIds={ids.components}
+          />
+        </div>
+        <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
+          {activeComponents.showOrderList &&
+            (
+              <div id={`${ids.components.orderList}`} data-tab-content>
+                <OrderList
+                  title={orderListTitle}
+                  orders={loaderData.orders}
                 />
               </div>
             )}
-            {activeComponents.showUserData && (
-              <div id={`${ids.components.userData}`} data-tab-content>
-                <UserData title={userDataTitle} data={loaderData.user} />
+          {activeComponents.showAddressList &&
+            (
+              <div id={`${ids.components.addressList}`} data-tab-content>
+                <AddressList
+                  title={addressListTitle}
+                  addresses={loaderData.addresses}
+                />
               </div>
             )}
-          </div>
+          {activeComponents.showCardList && (
+            <div id={`${ids.components.cardList}`} data-tab-content>
+              <CardList
+                title={cardListTitle}
+                cards={loaderData.cards}
+              />
+            </div>
+          )}
+          {activeComponents.showUserData && (
+            <div id={`${ids.components.userData}`} data-tab-content>
+              <UserData title={userDataTitle} data={loaderData.user} />
+            </div>
+          )}
         </div>
       </div>
-      <MyAccountJS
-        rootId={ids.root}
-        tabContainerId={ids.activeContent}
-        menuId={ids.menu}
-      />
     </div>
-  );
+    <MyAccountJS
+      tabsData={{
+        rootId: ids.root,
+        tabsContainerId: ids.activeContent,
+        menuId: ids.menu
+      }}
+      userData={{
+        title: userDataTitle,
+        data: loaderData.user
+      }}
+    />
+  </>);
 }
 
 export default MyAccount;

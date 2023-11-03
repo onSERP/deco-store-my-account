@@ -1,9 +1,17 @@
 import { useEffect } from "preact/hooks";
+import type {UserData as UserDataType} from "../../sections/MyAccount.tsx";
 
 export interface Props {
+ tabsData: {
   rootId: string;
   tabContainerId: string;
   menuId: string;
+ }
+ userData: {
+  title: string;
+  data: UserDataType
+ }
+
 }
 
 const ATTRIBUTES = {
@@ -13,8 +21,8 @@ const ATTRIBUTES = {
   "data-tab-menu-target": "data-tab-menu-target",
 };
 
-function MyAccountJS({ rootId, tabContainerId, menuId }: Props) {
-  const setup = ({ rootId, tabContainerId, menuId }: Props) => {
+function MyAccountJS({ tabsData, userData }: Props) {
+  const tabsFn = ({ rootId, tabContainerId, menuId }: Props) => {
     const root = document.getElementById(rootId);
     const tabContainer = document.getElementById(tabContainerId);
     const tabContent = tabContainer?.querySelectorAll(
@@ -50,8 +58,26 @@ function MyAccountJS({ rootId, tabContainerId, menuId }: Props) {
     });
   };
 
+  const userDataFn = ({title, data}) => {
+    let editButton = document.getElementById("user-data-edit");
+    let editForm = document.getElementById("user-data-edit-form");
+    let dataShow = document.getElementById("user-data-show");
+    let returnButton = document.getElementById("user-data-edit-return");
+
+    editButton?.addEventListener("click", function() {
+        editForm?.classList.remove("hidden");
+        dataShow?.classList.add("hidden");
+    });
+
+    returnButton?.addEventListener("click", function() {
+        editForm?.classList.add("hidden");
+        dataShow?.classList.remove("hidden");
+    });
+  }
+
   useEffect(() => {
-    setup({ rootId, tabContainerId, menuId });
+    tabsFn(tabsData);
+    userDataFn(userData)
   }, []);
 
   return <div data-my-account-js />;
