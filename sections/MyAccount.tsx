@@ -52,12 +52,14 @@ export interface Props {
   sectionTitle?: string;
 
   activeComponents?: {
+    showCustomList?: boolean;
     showOrderList?: boolean;
     showAddressList?: boolean;
     showCardList?: boolean;
     showUserData?: boolean;
   };
 
+  customListTitle?: string;
   orderListTitle?: string;
   addressListTitle?: string;
   cardListTitle?: string;
@@ -306,24 +308,24 @@ function MyAccount({
               itemsIds={ids.components}
             />
           </div>
-        <Button
-          class="btn btn-primary btn-sm my-custom-drawer"
-          aria-label="open menu"
-        >
-          <Icon id="Bars3" size={16} strokeWidth={2} />
-        </Button>
+          <Button
+            class="btn btn-primary btn-sm my-custom-drawer"
+            aria-label="open menu"
+          >
+            <Icon id="Bars3" size={16} strokeWidth={2} />
+          </Button>
 
-        <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
-          {activeComponents.showCustomList &&
-            (
-              <div id={`${ids.components.customList}`} data-tab-content>
-                <Custom title={customListTitle} />
-              </div>
-            )}
-          {activeComponents.showOrderList &&
-            (
-              <div id={`${ids.components.orderList}`} data-tab-content>
-                           {orderPage
+          <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
+            {activeComponents.showCustomList &&
+              (
+                <div id={`${ids.components.customList}`} data-tab-content>
+                  <Custom title={customListTitle} />
+                </div>
+              )}
+            {activeComponents.showOrderList &&
+              (
+                <div id={`${ids.components.orderList}`} data-tab-content>
+                  {orderPage
                     ? (
                       <OrderComponent
                         title={`Pedido #${orderPage}`}
@@ -340,6 +342,21 @@ function MyAccount({
                     )}
                 </div>
               )}
+            {activeComponents.showAddressList &&
+              (
+                <div id={`${ids.components.addressList}`} data-tab-content>
+                  <AddressList
+                    title={addressListTitle}
+                    addresses={loaderData.addresses}
+                  />
+                </div>
+              )}
+            {activeComponents.showCardList && (
+              <div id={`${ids.components.cardList}`} data-tab-content>
+                <CardList
+                  title={cardListTitle}
+                  cards={loaderData.cards}
+                />
               </div>
             )}
             {activeComponents.showUserData && (

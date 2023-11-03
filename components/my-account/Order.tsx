@@ -1,10 +1,9 @@
 export interface Props {
     title: string;
-    order: Order;
+    order: OrderType;
 }
 import Title from "./Title.tsx";
-import Order from "../../sections/MyAccount.tsx";
-import Item from "../../sections/MyAccount.tsx";
+import type {Order as OrderType} from "../../sections/MyAccount.tsx";
 
 function Order({title, order}: Props) {
     let statusClass = '';
@@ -21,7 +20,7 @@ function Order({title, order}: Props) {
     }
 
     return <div>
-        <Title title={title} />
+        <Title content={title} />
         <div class="flex justify-between items-center">
             <p class={statusClass}>{order.status}</p>
             <p class="text-gray-400">{order.date}</p>
