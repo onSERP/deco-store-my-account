@@ -7,11 +7,11 @@ import MyAccountJS from "../islands/MyAccountJS.tsx";
 
 import { useId } from "$store/sdk/useId.ts";
 
+import { Section } from "deco/blocks/section.ts";
+
 import Address from "../components/my-account/Address.tsx";
 import AddressList from "../components/my-account/AddressList.tsx";
 import CardList from "../components/my-account/CardList.tsx";
-import Card from "../components/my-account/Card.tsx";
-import Custom from "./Custom.tsx";
 import OrderList from "../components/my-account/OrderList.tsx";
 import { default as OrderComponent } from "../components/my-account/Order.tsx";
 import UserData from "../components/my-account/UserData.tsx";
@@ -52,14 +52,21 @@ export interface Props {
   sectionTitle?: string;
 
   activeComponents?: {
-    showCustomList?: boolean;
     showOrderList?: boolean;
     showAddressList?: boolean;
     showCardList?: boolean;
     showUserData?: boolean;
   };
+  /** @titleBy title */
+  /** @description Adicione seções personalizadas */
+  customSections?: {
+    title: string;
+    subtitle: string;
+    content: Section[];
+  }[];
 
-  customListTitle?: string;
+  customSectionsPosition?: "before" | "after";
+
   orderListTitle?: string;
   addressListTitle?: string;
   cardListTitle?: string;
@@ -258,13 +265,13 @@ const loaderData: LoaderData = {
 function MyAccount({
   sectionTitle = "Minha Conta",
   activeComponents = {
-    showCustomList: true,
     showOrderList: true,
     showAddressList: true,
     showCardList: true,
     showUserData: true,
   },
-  customListTitle = "Minhas Ofertas",
+  customSections = [],
+  customSectionsPosition = "before",
   orderListTitle = "Pedidos",
   addressListTitle = "Endereços",
   cardListTitle = "Formas de Pagamento",
@@ -277,7 +284,6 @@ function MyAccount({
     activeContent: useId(),
     menu: useId(),
     components: {
-      customList: useId(),
       orderList: useId(),
       addressList: useId(),
       order: useId(),
@@ -289,6 +295,23 @@ function MyAccount({
   if (notFound) {
     return <NotFound />;
   }
+
+  const customElements = customSections.map((list) => {
+    const customListId = useId();
+    return {
+      id: customListId,
+      title: list.title,
+      subtitle: list.subtitle,
+      fragment: (
+        <div id={customListId} data-tab-content>
+          <Title content={list.title} size="medium" />
+          {list.content.map((section) => (
+            <section.Component {...section.props} />
+          ))}
+        </div>
+      ),
+    };
+  });
 
   return (
     <>
@@ -306,6 +329,12 @@ function MyAccount({
               id={ids.menu}
               activeComponents={activeComponents}
               itemsIds={ids.components}
+              customSections={customElements.map((item) => ({
+                id: item.id,
+                title: item.title,
+                subtitle: item.subtitle,
+              }))}
+              customSectionsPosition={customSectionsPosition}
             />
           </div>
           <Button
@@ -316,12 +345,8 @@ function MyAccount({
           </Button>
 
           <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
-            {activeComponents.showCustomList &&
-              (
-                <div id={`${ids.components.customList}`} data-tab-content>
-                  <Custom title={customListTitle} />
-                </div>
-              )}
+            {customSectionsPosition === "before" && customSections.length > 0 &&
+              <>{customElements.map((item) => item.fragment)}</>}
             {activeComponents.showOrderList &&
               (
                 <div id={`${ids.components.orderList}`} data-tab-content>
@@ -364,6 +389,9 @@ function MyAccount({
                 <UserData title={userDataTitle} data={loaderData.user} />
               </div>
             )}
+
+            {customSectionsPosition === "after" && customSections.length > 0 &&
+              <>{customElements.map((item) => item.fragment)}</>}
           </div>
         </div>
       </div>
