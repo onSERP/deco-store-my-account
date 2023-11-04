@@ -338,7 +338,7 @@ function MyAccount({
             />
           </div>
           <Button
-            class="btn btn-primary btn-sm my-custom-drawer"
+            class="btn btn-primary btn-sm my-custom-drawer lg:hidden"
             aria-label="open menu"
           >
             <Icon id="Bars3" size={16} strokeWidth={2} />
