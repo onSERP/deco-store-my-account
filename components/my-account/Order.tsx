@@ -74,7 +74,8 @@ function Order({title, order}: Props) {
             <p class ="font-bold">R$ {order.total + order.shipping - order.discount}</p>
         </div>
 
-        <a aria-label="Comprar novamente" href="#" class="btn btn-primary uppercase">Comprar novamente</a>
+        <a id="user-data-edit-return" aria-label="Voltar" href="#" class="btn uppercase">Voltar</a>
+        <a aria-label="Comprar novamente" href="#" class="btn btn-primary uppercase ml-4">Comprar novamente</a>
     </div>;
 }
 
