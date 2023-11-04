@@ -283,6 +283,7 @@ function MyAccount({
     root: useId(),
     activeContent: useId(),
     menu: useId(),
+    hamburger: useId(),
     components: {
       orderList: useId(),
       addressList: useId(),
@@ -338,8 +339,9 @@ function MyAccount({
             />
           </div>
           <Button
-            class="btn btn-primary btn-sm my-custom-drawer lg:hidden"
+            class="btn btn-ghost btn-circle btn-sm lg:hidden py-8"
             aria-label="open menu"
+            id={ids.hamburger}
           >
             <Icon id="Bars3" size={16} strokeWidth={2} />
           </Button>
@@ -400,6 +402,7 @@ function MyAccount({
           rootId: ids.root,
           tabContainerId: ids.activeContent,
           menuId: ids.menu,
+          hamburgerId: ids.hamburger,
           userDataId: ids.components.userData,
         }}
 

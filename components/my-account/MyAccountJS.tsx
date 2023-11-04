@@ -5,6 +5,7 @@ export interface Props {
     rootId: string;
     tabContainerId: string;
     menuId: string;
+    hamburgerId: string;
     userDataId: string;
   };
 }
@@ -21,7 +22,7 @@ const ATTRIBUTES = {
 };
 
 function MyAccountJS({ tabsData }: Props) {
-  const tabsFn = ({ rootId, tabContainerId, menuId }: Props["tabsData"]) => {
+  const tabsFn = ({ rootId, tabContainerId, menuId, hamburgerId }: Props["tabsData"]) => {
     const root = document.getElementById(rootId);
     const tabContainer = document.getElementById(tabContainerId);
     const tabContent = tabContainer?.querySelectorAll(
@@ -73,10 +74,12 @@ function MyAccountJS({ tabsData }: Props) {
       });
     });
 
-    const drawer = document.getElementsByClassName("my-custom-drawer")[0];
+    const hamburger = document.getElementById(hamburgerId);
+
     const menu = document.getElementById(menuId);
-    drawer?.addEventListener("click", function () {
-      menu?.classList.toggle("hidden");
+    if (!hamburger || !menu) return;
+    hamburger.addEventListener("click", function () {
+      menu.classList.toggle("hidden");
     });
   };
 
