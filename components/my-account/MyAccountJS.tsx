@@ -22,7 +22,9 @@ const ATTRIBUTES = {
 };
 
 function MyAccountJS({ tabsData }: Props) {
-  const tabsFn = ({ rootId, tabContainerId, menuId, hamburgerId }: Props["tabsData"]) => {
+  const tabsFn = (
+    { rootId, tabContainerId, menuId, hamburgerId }: Props["tabsData"],
+  ) => {
     const root = document.getElementById(rootId);
     const tabContainer = document.getElementById(tabContainerId);
     const tabContent = tabContainer?.querySelectorAll(

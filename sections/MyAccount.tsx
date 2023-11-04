@@ -338,13 +338,15 @@ function MyAccount({
               customSectionsPosition={customSectionsPosition}
             />
           </div>
+          <div class="py-8">
           <Button
-            class="btn btn-ghost btn-circle btn-sm lg:hidden py-8"
+            class="btn btn-ghost btn-circle btn-sm lg:hidden"
             aria-label="open menu"
             id={ids.hamburger}
           >
-            <Icon id="Bars3" size={16} strokeWidth={2} />
+            <Icon id="Bars3" size={16} strokeWidth={1} />
           </Button>
+          </div>
 
           <div class="w-full lg:w-auto flex-1 lg:pl-8" id={ids.activeContent}>
             {customSectionsPosition === "before" && customSections.length > 0 &&
@@ -394,7 +396,7 @@ function MyAccount({
 
             {customSectionsPosition === "after" && customSections.length > 0 &&
               <>{customElements.map((item) => item.fragment)}</>}
-          </div>
+         </div>
         </div>
       </div>
       <MyAccountJS
