@@ -400,11 +400,9 @@ function MyAccount({
           rootId: ids.root,
           tabContainerId: ids.activeContent,
           menuId: ids.menu,
+          userDataId: ids.components.userData,
         }}
-        userData={{
-          title: userDataTitle,
-          data: loaderData.user,
-        }}
+
       />
     </>
   );
