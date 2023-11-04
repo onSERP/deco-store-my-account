@@ -10,10 +10,10 @@ export interface Props {
 function CardList({title, cards}: Props) {
   return <div>
     <Title content={title} size="medium" />
-    <div class="bg-white flex flex-row justify-center items-center mb-4">
+    <div class="bg-white flex flex-row items-start mb-4 mx-6">
       {cards.map((card, i) => {
       return (
-        <div key={i} class="w-96 h-56 m-auto bg-red-100 rounded-xl relative text-white shadow-2xl">
+        <div key={i} class="w-96 h-56 bg-red-100 rounded-xl relative text-white shadow-2xl">
             <img class="relative object-cover w-full h-full rounded-xl" src="https://i.imgur.com/kGkSg1v.png"></img>
             <div class="w-full px-8 absolute top-8 content-center">
               <div class="pt-1">

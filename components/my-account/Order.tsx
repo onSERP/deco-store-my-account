@@ -69,10 +69,12 @@ function Order({title, order}: Props) {
             <p>Frete</p>
             <p>R$ {order.shipping === 0 ? 'Grátis' : order.shipping}</p>
         </div>
-        <div class="flex justify-between items-center text-lg">
+        <div class="flex justify-between items-center py-2 text-lg">
             <p class="font-bold uppercase">Total</p>
             <p class ="font-bold">R$ {order.total + order.shipping - order.discount}</p>
         </div>
+
+        <a aria-label="Comprar novamente" href="#" class="btn btn-primary uppercase">Comprar novamente</a>
     </div>;
 }
 
