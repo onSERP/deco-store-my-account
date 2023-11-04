@@ -42,23 +42,25 @@ function MyAccountJS({ tabsData }: Props) {
     // get active tab
     const activeTab = localStorage.getItem("myAccount_activeTab");
     if (activeTab) {
-      const tabTarget = document.getElementById(activeTab);
+      const tabTarget = document.getElementById(
+        (tabs[Number(activeTab) - 1] as HTMLElement)?.dataset
+          .tabMenuTarget as string,
+      );
 
-      console.log(activeTab, tabTarget);
       tabTarget && tabTarget.classList.remove("hidden");
     }
 
     // change tabs on click
-    tabs.forEach((tab) => {
+    tabs.forEach((tab, i) => {
       tab.addEventListener("click", () => {
         const tabTarget = document.getElementById(
           (tab as HTMLElement)?.dataset.tabMenuTarget as string,
         );
 
-        // save active tab
+        // save active tab index
         localStorage.setItem(
           "myAccount_activeTab",
-          (tab as HTMLElement)?.dataset?.tabMenuTarget as string,
+          (i + 1).toString(),
         );
 
         // remove active class from all tabs
